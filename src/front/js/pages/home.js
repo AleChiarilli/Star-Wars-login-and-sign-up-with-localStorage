@@ -1,26 +1,41 @@
-import React, { useContext } from "react";
-import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
-import "../../styles/home.css";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ScrollToTop from "./component/scrollToTop";
 
-export const Home = () => {
-	const { store, actions } = useContext(Context);
+import { Home } from "./views/home";
+// import { Demo } from "./views/demo";
+// import { Single } from "./views/single";
+import injectContext from "./store/appContext";
+
+import { Navbar } from "./component/navbar";
+import { Footer } from "./component/footer";
+import { DetailsCharacter } from "./views/detailsCharacter";
+import { Details } from "./views/detailsPlanets";
+
+//create your first component
+const Layout = () => {
+	//the basename is used when your project is published in a subdirectory and not in the root of the domain
+	// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
+	const basename = process.env.BASENAME || "";
 
 	return (
-		<div className="text-center mt-5">
-			<h1>Hello Rigo!!</h1>
-			<p>
-				<img src={rigoImageUrl} />
-			</p>
-			<div className="alert alert-info">
-				{store.message || "Loading message from the backend (make sure your python backend is running)..."}
-			</div>
-			<p>
-				This boilerplate comes with lots of documentation:{" "}
-				<a href="https://start.4geeksacademy.com/starters/react-flask">
-					Read documentation
-				</a>
-			</p>
+		<div>
+			<BrowserRouter basename={basename}>
+				<ScrollToTop>
+					<Navbar />
+					<Routes>
+						<Route path="/" element={<Home />} />
+						<Route path="/detailsCharacter/:theid" element={<DetailsCharacter />} />
+						<Route path="/detailsPlanet/:theid" element={<Details />} />
+						{/* <Route path="/demo" element={<Demo />} /> */}
+						{/* <Route path="/single/:theid" element={<Single />} /> */}
+						<Route path="*" element={<h1>Not found!</h1>} />
+					</Routes>
+					<Footer />
+				</ScrollToTop>
+			</BrowserRouter>
 		</div>
 	);
 };
+
+export default injectContext(Layout);
