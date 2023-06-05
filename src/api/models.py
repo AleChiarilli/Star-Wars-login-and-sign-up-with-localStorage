@@ -8,8 +8,8 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 api = Flask(__name__)
-app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
-jwt = JWTManager(app)
+api.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+jwt = JWTManager(api)
 
 db = SQLAlchemy()
 
@@ -97,13 +97,3 @@ class FavoriteCharacters(db.Model):
             "name": self.user_id,
             # do not serialize the password, its a security breach
         }
-
-@app.route("/login", methods=["POST"])
-def login():
-    username = request.json.get("username", None)
-    password = request.json.get("password", None)
-    if username != "test" or password != "test":
-        return jsonify({"msg": "Bad username or password"}), 401
-
-    access_token = create_access_token(identity=username)
-    return jsonify(access_token=access_token)

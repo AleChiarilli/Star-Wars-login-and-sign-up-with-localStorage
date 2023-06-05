@@ -5,6 +5,11 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User
 from api.utils import generate_sitemap, APIException
 
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+
 api = Blueprint('api', __name__)
 
 
@@ -189,3 +194,30 @@ def delete_character(id):
     }
     return jsonify(response_body), 200
     
+# estas son las rutas para el register, login
+
+@api.route('/sign_up', methods=['POST'])
+def sign_up():
+    data = request.json
+    taken = User.query.filter_by(email = data.get('email')).first()
+    if not taken:
+        user = User(email = data.get('email'), password = data.get('password'), is_active=True)
+        db.session.add(user)
+        db.session.commit()
+        token = create_access_token(identity = user.id)
+        return jsonify({'token':token , 'user':user.serialize() })
+    else:
+        return jsonify({'error': 'This email is already been used'})
+
+@api.route("/login", methods=["POST"])
+def login():
+    email = request.json.get("email", None)
+    password = request.json.get("password", None)
+    if not email or not password: 
+        return jsonify({"msg": "Bad email or password"}), 401
+    user = User.query.filter_by(email = email, password = password).first()
+    if not user:
+        return jsonify({"msg": "User doesn't exist"}), 401
+    
+    access_token = create_access_token(identity=user.id)
+    return jsonify({"access_token":access_token})
