@@ -7,7 +7,6 @@ import { Input } from "../component/inputs.js";
 export const Home = () => {
 	return (
 	<div>
-	<Input/>
 	<Character/>
 	<Planets/>
 	</div>

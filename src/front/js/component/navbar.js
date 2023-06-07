@@ -1,11 +1,21 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
 
 export const Navbar = () => {
-  
-  const { store } = useContext(Context);
+
+  const { store, actions } = useContext(Context);
+
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const handleSignUp = () => {
+    actions.signUp(email, password)
+  }
+
+  const handleLogIn = () => {
+    actions.logIn(email,password)
+  }
 
   return (
     <nav
@@ -13,15 +23,19 @@ export const Navbar = () => {
       style={{ borderBottom: "1px solid lightgray" }}
     >
       <div className="container-fluid ">
-      <Link to={`/`} className="navbar-brand ">
+        <Link to={`/`} className="navbar-brand ">
+
+          <img
+            className="mx-5"
+            style={{ height: "50px", width: "90px" }}
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Star_wars2.svg/1200px-Star_wars2.svg.png"
+          />
+
+          <input type="text" placeholder="email" onChange={(e) => setEmail(e.target.value)} />
+          <input type="password" placeholder="password" onChange={(e) => setPassword(e.target.value)} />
+          <button onClick={() => { handleSignUp() }}>sign up</button>
+          <button onClick={() => { handleLogIn() }}>log in</button>
           
-            <img
-              className="mx-5"
-              style={{ height: "50px", width: "90px" }}
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/Star_wars2.svg/1200px-Star_wars2.svg.png"
-            />
-          
-        
         </Link>
         <form className="d-flex" role="search">
           <div className="dropdown mx-2">
