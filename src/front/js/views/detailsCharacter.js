@@ -1,15 +1,20 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export const DetailsCharacter = () => {
   const { actions, store } = useContext(Context);
+
   const params = useParams();
+
+
+
   useEffect(() => {
     // Solicitud GET (Request).
+    console.log(params);
     actions.obtenerPersonaje(params.theid);
   }, []);
+
   return (
     <div className="d-flex">
       <div>

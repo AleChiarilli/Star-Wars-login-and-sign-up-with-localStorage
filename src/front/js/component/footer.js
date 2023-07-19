@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 
 export const Footer = () => {
 	return (
@@ -8,30 +8,11 @@ export const Footer = () => {
     <div  className="container pt-4">
       {/* <!-- Section: Social media --> */}
       <section  className="mb-4">
-        {/* <!-- Facebook --> */}
-        <a
-           className="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-        >
-          <i  className="fab fa-facebook-f"></i>
-        </a>
-
-        {/* <!-- Twitter --> */}
-        <a
-           className="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
-          role="button"
-          data-mdb-ripple-color="dark"
-        >
-          <i  className="fab fa-twitter"></i>
-        </a>
 
         {/* <!-- Google --> */}
         <a
            className="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
+          href="mailto:alejandrochiarilli@gmail.com"
           role="button"
           data-mdb-ripple-color="dark"
         >
@@ -41,7 +22,7 @@ export const Footer = () => {
         {/* <!-- Instagram --> */}
         <a
            className="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
+          href="https://www.instagram.com/chiarilli/"
           role="button"
           data-mdb-ripple-color="dark"
         >
@@ -51,7 +32,7 @@ export const Footer = () => {
         {/* <!-- Linkedin --> */}
         <a
            className="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
+          href="https://www.linkedin.com/in/alechiarilli/"
           role="button"
           data-mdb-ripple-color="dark"
         >
@@ -60,7 +41,7 @@ export const Footer = () => {
         {/* <!-- Github --> */}
         <a
            className="btn btn-link btn-floating btn-lg text-dark m-1"
-          href="#!"
+          href="https://github.com/AleChiarilli"
           role="button"
           data-mdb-ripple-color="dark"
         >
